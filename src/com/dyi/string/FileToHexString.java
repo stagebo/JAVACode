@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileToHexString {
 	public static void main(String[] agrs) throws Exception {
 		File file = new File("G:\\img\\17ƒÍ5‘¬ ”‡«Ô”Í ÃÏΩÚ\\QQÕº∆¨20170529233828.jpg");
-		
+
 		String hexData = fileToHexString(file);
 		System.out.println(hexData);
 	}
@@ -19,10 +19,10 @@ public class FileToHexString {
 		}
 		long fileLength = file.length();
 		byte[] b = new byte[(int) fileLength];
-		
+
 		BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
-		int k=fis.read(b);
-		if(k==-1){
+		int k = fis.read(b);
+		if (k == -1) {
 			return null;
 		}
 
