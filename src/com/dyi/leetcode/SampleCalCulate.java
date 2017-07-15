@@ -38,7 +38,6 @@ public class SampleCalCulate {
 			str[index++] = cNum[i];
 
 		}
-		int k = str.length;
 		str[str.length - 1] = sNum[sNum.length - 1];
 		/* ´¦Àí³ËºÍ³ý */
 		for (int i = 0; i < str.length; i++) {

@@ -18,7 +18,6 @@ package com.dyi.leetcode;
  *
  */
 public class TreeSum {
-	private int a;
 
 	public boolean hasPathSum(TreeNode root, int sum) {
 

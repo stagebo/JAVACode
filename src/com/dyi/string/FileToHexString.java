@@ -23,6 +23,7 @@ public class FileToHexString {
 		BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
 		int k = fis.read(b);
 		if (k == -1) {
+			fis.close();
 			return null;
 		}
 
@@ -35,6 +36,7 @@ public class FileToHexString {
 				buf.append("\n");
 		}
 		buf.append("\n");
+		fis.close();
 		return buf.toString();
 	}
 }

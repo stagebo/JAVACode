@@ -4,6 +4,7 @@ public class TwoNums {
 	public static void main(String[] args) {
 		int[] a={2,3,4,6};
 		int[] b=solution(a,6);//[1,2]
+		System.out.println(b);
 	}
 	/**
 	 * 
