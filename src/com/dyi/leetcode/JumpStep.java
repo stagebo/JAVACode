@@ -37,7 +37,14 @@ public class JumpStep {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 10; i++)
-			System.out.println(climbStairs(i) + "--" + climbStair(i + 1));
+		long t1=System.currentTimeMillis();
+		for (int i = 0; i < 200; i++)
+			System.out.println(climbStairs(i));
+		long t2=System.currentTimeMillis();
+		for (int i = 0; i < 200; i++)
+			System.out.println(climbStair(i));
+		long t3=System.currentTimeMillis();
+		System.out.println(t2-t1);
+		System.out.println(t3-t2);
 	}
 }
