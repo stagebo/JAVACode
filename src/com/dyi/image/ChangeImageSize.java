@@ -14,7 +14,7 @@ public class ChangeImageSize {
 	 * @param width
 	 * @param height
 	 * @return
-	 */
+	 */ 
 	public static BufferedImage changeImageSize(BufferedImage img, int width, int height) {
 		BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics g = result.getGraphics();
