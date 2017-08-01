@@ -48,11 +48,12 @@ public class MaxNumber321 {
 		for(int m=0;m<maxIndex.length;m++){
 			maxIndex[m]=m;
 		}
-		for(int d=maxIndex.length;d<merge.length;d++)
+		System.out.println(Arrays.toString(maxIndex));
+		for(int d=maxIndex.length;d<merge.length;d++)//找出最大的k个
 			for(int x=0;x<maxIndex.length;x++)
 				if(merge[d]>merge[maxIndex[x]])
 					maxIndex[x]=d;
-		
+		System.out.println(Arrays.toString(maxIndex));
 		for(int d=0;d<maxIndex.length;d++)
 			for(int x=d+1;x<maxIndex.length;x++)
 				if(maxIndex[d]>maxIndex[x]){
@@ -60,13 +61,15 @@ public class MaxNumber321 {
 					maxIndex[d]=maxIndex[x];
 					maxIndex[x]=temp;
 				}
+		System.out.println(Arrays.toString(maxIndex));
 		for(int d=0;d<maxIndex.length;d++)
 			maxIndex[d]=merge[maxIndex[d]];
+		System.out.println(Arrays.toString(maxIndex));
 		return maxIndex;
 
 	}
 	public boolean greatOrEquals(int[] a,int[] b,int i,int j){
-		for(i=0;i<a.length&&j<b.length;i++){
+		for(;i<a.length&&j<b.length;i++,j++){
 			if(a[i]>b[j])return true;
 			else if(a[i]<b[j])return false;
 		}
@@ -75,8 +78,9 @@ public class MaxNumber321 {
 		return true;
 	}
 	public static void main(String[] args) {
-		int[] a={9,0,6,9},
-				b={5,0,6,9,4};
+		int[] a={9,0,6,8},
+				b={6,0,2,5,4};
+		MaxNumber321 m=new MaxNumber321();
 		System.out.println(Arrays.toString(a));
 		System.out.println(Arrays.toString(b));
 		System.out.println(Arrays.toString(new MaxNumber321().maxNumber(a, b, 3)));
