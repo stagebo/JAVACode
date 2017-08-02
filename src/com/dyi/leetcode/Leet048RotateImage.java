@@ -10,7 +10,7 @@ package com.dyi.leetcode;
  * @author WANYONGBO 2017年7月19日15:47:42
  *
  */
-public class RotateImage {
+public class Leet048RotateImage {
 	/**
 	 * 顺时针旋转矩阵，沿着主对角线翻折，再沿着纵向对称轴翻折即可。 逆时针旋转矩阵，沿着主对角线翻折，再沿着横向对称轴翻折即可。
 	 * 2017年7月19日15:47:37

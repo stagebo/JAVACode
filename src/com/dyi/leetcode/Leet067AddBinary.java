@@ -8,7 +8,7 @@ package com.dyi.leetcode;
  * @author WANYONGBO
  *
  */
-public class AddBinary {
+public class Leet067AddBinary {
 	public static String addBinary(String a, String b) {
 		StringBuilder sa = new StringBuilder(a.length() > b.length() ? a : b).reverse(),
 				sb = new StringBuilder(a.length() > b.length() ? b : a).reverse(), re = new StringBuilder();

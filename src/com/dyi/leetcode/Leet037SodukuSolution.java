@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author WANYONGBO
  *
  */
-public class SodukuSolution {
+public class Leet037SodukuSolution {
 	int arr[][];
 	int brr[][]=new int[9][9];
 	/**
@@ -72,7 +72,7 @@ public class SodukuSolution {
 				{ 0, 0, 0, 4, 1, 9, 0, 0, 5 }, 
 				{ 0, 0, 0, 0, 8, 0, 0, 7, 9 }
 				};
-		SodukuSolution s=new SodukuSolution();
+		Leet037SodukuSolution s=new Leet037SodukuSolution();
 		s.arr=b;
 		for(int i=0;i<9;i++)
 			for(int j=0;j<9;j++)

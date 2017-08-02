@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author WANYONGBO
  *
  */
-public class IsHappyNumber {
+public class Leet202IsHappyNumber {
 	ArrayList<Integer> l = new ArrayList<Integer>();
 
 	public boolean isHappy(int n) {
@@ -47,6 +47,6 @@ public class IsHappyNumber {
 
 	public static void main(String[] args) {
 		for (int i = 0; i < 20; i++)
-			System.out.println(i + ":" + new IsHappyNumber().isHappy(i));
+			System.out.println(i + ":" + new Leet202IsHappyNumber().isHappy(i));
 	}
 }

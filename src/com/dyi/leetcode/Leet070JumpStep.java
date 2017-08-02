@@ -11,7 +11,7 @@ package com.dyi.leetcode;
  * @author WANYONGBO
  *
  */
-public class JumpStep {
+public class Leet070JumpStep {
 	private static int[] s;
 
 	public static int climbStairs(int n) {

@@ -7,7 +7,7 @@ package com.dyi.leetcode;
  * @author WANYONGBO
  *
  */
-public class LongestCommonPrefix {
+public class Leet014LongestCommonPrefix {
 	public static void main(String[] args) {
 		System.out.println("123".startsWith(""));
 	}

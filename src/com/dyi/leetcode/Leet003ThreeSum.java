@@ -30,7 +30,7 @@ import java.util.List;
  * @author Stagebo
  *
  */
-public class ThreeSum {
+public class Leet003ThreeSum {
 	private int[] arr;
 	private List<ArrayList<Integer>> re;
 	private HashSet<String> hs;
@@ -94,7 +94,7 @@ public class ThreeSum {
 	}
 
 	public static void main(String[] args) {
-		ThreeSum t = new ThreeSum();
+		Leet003ThreeSum t = new Leet003ThreeSum();
 		/* ≤‚ ‘ThreeSum */
 		int[] n = new int[] { -1, 0, 1, 2, -1, -4 };
 		t.threeSum(n, 0, 3);

@@ -19,7 +19,14 @@ import java.util.Arrays;
  * @author WANYONGBO
  *
  */
-public class MaxNumber321 {
+public class Leet321MaxNumber {
+	/**
+	 * 2017年8月2日10:35:21:思路不正确，更改
+	 * @param n1
+	 * @param n2
+	 * @param k
+	 * @return
+	 */
 	public int[] maxNumber(int[] n1, int[] n2, int k) {
 		int[] maxIndex=new int[k];
 		int[] merge=new int[n1.length+n2.length];
@@ -88,9 +95,9 @@ public class MaxNumber321 {
 	public static void main(String[] args) {
 		int[] a={3,9},
 				b={8,9};
-		MaxNumber321 m=new MaxNumber321();
+		Leet321MaxNumber m=new Leet321MaxNumber();
 		System.out.println(Arrays.toString(a));
 		System.out.println(Arrays.toString(b));
-		System.out.println(Arrays.toString(new MaxNumber321().maxNumber(a, b, 3)));
+		System.out.println(Arrays.toString(new Leet321MaxNumber().maxNumber(a, b, 3)));
 	}
 }

@@ -11,7 +11,7 @@ package com.dyi.leetcode;
  * @author WANYONGBO
  *
  */
-public class MergeTwoSortedArray {
+public class Leet088MergeTwoSortedArray {
 	/**
 	 * 归并排序最后一步，合并两个子表
 	 * @param n1
