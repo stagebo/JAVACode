@@ -45,15 +45,21 @@ public class MaxNumber321 {
 			merge[index++]=n2[j++];
 		}
 		System.out.println(Arrays.toString(merge));
+		
 		for(int m=0;m<maxIndex.length;m++){
 			maxIndex[m]=m;
 		}
 		System.out.println(Arrays.toString(maxIndex));
-		for(int d=maxIndex.length;d<merge.length;d++)//找出最大的k个
+		
+		for(int d=maxIndex.length;d<merge.length;d++){//找出最大的k个			
 			for(int x=0;x<maxIndex.length;x++)
-				if(merge[d]>merge[maxIndex[x]])
+				if(merge[d]>merge[maxIndex[x]]){
 					maxIndex[x]=d;
+					break;
+				}
+		}
 		System.out.println(Arrays.toString(maxIndex));
+		
 		for(int d=0;d<maxIndex.length;d++)
 			for(int x=d+1;x<maxIndex.length;x++)
 				if(maxIndex[d]>maxIndex[x]){
@@ -62,9 +68,11 @@ public class MaxNumber321 {
 					maxIndex[x]=temp;
 				}
 		System.out.println(Arrays.toString(maxIndex));
+		
 		for(int d=0;d<maxIndex.length;d++)
 			maxIndex[d]=merge[maxIndex[d]];
 		System.out.println(Arrays.toString(maxIndex));
+		
 		return maxIndex;
 
 	}
@@ -78,8 +86,8 @@ public class MaxNumber321 {
 		return true;
 	}
 	public static void main(String[] args) {
-		int[] a={9,0,6,8},
-				b={6,0,2,5,4};
+		int[] a={3,9},
+				b={8,9};
 		MaxNumber321 m=new MaxNumber321();
 		System.out.println(Arrays.toString(a));
 		System.out.println(Arrays.toString(b));

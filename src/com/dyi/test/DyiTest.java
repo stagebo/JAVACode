@@ -2,7 +2,14 @@ package com.dyi.test;
 
 public class DyiTest {
 	public static void main(String[] args) {
-		System.out.println(Integer.MAX_VALUE);
-		System.out.println(Integer.toBinaryString(21474778));
+		for (int i = 0; i < 9; i++) {
+			
+			for (int j = 0; j < 9; j++) {
+				if (j ==3)
+					break;
+				System.out.print(j + "-");
+			}
+			System.out.println();
+		}
 	}
 }
