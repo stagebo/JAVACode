@@ -21,8 +21,15 @@ import java.util.Arrays;
  *
  */
 public class Leet321MaxNumber_03 {
+	private int[] n1;
+	private int[] n2;
+	private int[][] nsum;
+	private int k;
+	private int[] result;
+	private int sumLen;
+	private int maxResult;
 	/**
-	 * 2017年8月2日10:35:21:思路不正确，更改
+	 * 2017年8月7日10:54:38--利用回溯法求出合法全解，取最大值
 	 * 
 	 * @param n1
 	 * @param n2
@@ -30,16 +37,30 @@ public class Leet321MaxNumber_03 {
 	 * @return
 	 */
 	public int[] maxNumber(int[] n1, int[] n2, int k) {
+		/* 初始化 */
 		result = new int[k];
 		this.n1 = n1;
 		this.n2 = n2;
 		this.k = k;
 		this.sumLen = n1.length + n2.length;
 		copyArrays();
+		maxResult=0;
+		/* 求全解 */
 		solution(0);
-		return result;
+		/* 取最值 */
+		int max = maxResult;
+		int[] re = new int[result.length];
+		int in = re.length - 1;
+		while (max > 0) {
+			re[in--] = max % 10;
+			max /= 10;
+		}
+		return re;
 	}
 
+	/**
+	 * 将两个数组连接到一个长数组里面
+	 */
 	private void copyArrays() {
 		// TODO Auto-generated method stub
 		nsum = new int[2][n1.length + n2.length];
@@ -56,22 +77,27 @@ public class Leet321MaxNumber_03 {
 		}
 	}
 
-	private int[] n1;
-	private int[] n2;
-	private int[][] nsum;
-	private int k;
-	private int[] result;
-	private int sumLen;
-
+	/**
+	 * 回溯法主体
+	 * 
+	 * @param n
+	 */
 	public void solution(int n) {
+		//System.out.println(n + ":" + Arrays.toString(result));//记录回溯过程
 		if (n == k) {
 			if (isLegal()) {
-				System.out.println(Arrays.toString(result));
+				int[] tre = new int[result.length];
+				for (int i = 0; i < tre.length; i++) {
+					tre[i] = nsum[0][result[i]];
+				}
+				String str = Arrays.toString(tre).replace(",", "").replace(" ", "").replace("[", "").replace("]", "");
+				int strInt=Integer.parseInt(str);
+				maxResult=maxResult>strInt?maxResult:strInt;				
 				return;
 			}
 		}
-		for (int i = 0; i < nsum.length; i++) {
-			int max = getMaxIndex();
+		int[] maxTemp = getSortArray();
+		for (int max : maxTemp) {
 			if (yetLegal(max, n)) {
 				result[n] = max;
 				nsum[1][max] = 1;
@@ -82,67 +108,101 @@ public class Leet321MaxNumber_03 {
 
 	}
 
+	/**
+	 * 提取数组中所有未使用过的数值下标，并按照降序排列
+	 * 
+	 * @return
+	 */
+	private int[] getSortArray() {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		for (int i = 0; i < nsum[0].length; i++) {
+			if (nsum[1][i] == 0)
+				l.add(i);
+		}
+
+		int[] re = new int[l.size()];
+		for (int i = 0; i < re.length; i++)
+			re[i] = l.get(i);
+		for (int i = 0; i < re.length; i++)
+			for (int j = 0; j < re.length; j++) {
+				if (nsum[0][re[i]] < nsum[0][re[j]]) {
+					int temp = re[i];
+					re[i] = re[j];
+					re[j] = temp;
+				}
+			}
+
+		return re;
+	}
+
+	/**
+	 * 判断到目前为止是否合法
+	 * 
+	 * @param max
+	 * @param n
+	 * @return
+	 */
 	private boolean yetLegal(int max, int n) {
 		// TODO Auto-generated method stub
 		ArrayList<Integer> l1 = new ArrayList<Integer>();
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
-		for(int i=0;i<n;i++)
-		{
-			if(result[i]>=n1.length)
+		for (int i = 0; i < n; i++) {
+			if (result[i] >= n1.length)
 				l2.add(result[i]);
-			else 
-				l1.add(result[i]);			
+			else
+				l1.add(result[i]);
 		}
-		if(max>0){
-			if(max>=n1.length)l2.add(max);
-			else l1.add(max);
+		if (max > 0) {
+			if (max >= n1.length)
+				l2.add(max);
+			else
+				l1.add(max);
 		}
-		for(int i=0;i<l1.size()-1;i++){
-			if(l1.get(i)>l1.get(i+1))return false;
+		for (int i = 0; i < l1.size() - 1; i++) {
+			if (l1.get(i) > l1.get(i + 1))
+				return false;
 		}
-		for(int i=0;i<l2.size()-1;i++){
-			if(l2.get(i)>l2.get(i+1))return false;
+		for (int i = 0; i < l2.size() - 1; i++) {
+			if (l2.get(i) > l2.get(i + 1))
+				return false;
 		}
 		return true;
 	}
 
-	private int getMaxIndex() {
-		// TODO Auto-generated method stub
-		int maxIndex = 0;
-		for (int i = 0; i < nsum[0].length; i++) {
-			if (nsum[0][maxIndex] < nsum[0][i] && nsum[1][i] == 0) {
-				maxIndex = i;
-			}
-		}
-		
-		return nsum[1][maxIndex] == 0 ? maxIndex : -1;
-	}
-
+	/**
+	 * 判断最终值是否合法
+	 * 
+	 * @return
+	 */
 	public boolean isLegal() {
 		ArrayList<Integer> l1 = new ArrayList<Integer>();
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
-		for(int i=0;i<k;i++)
-		{
-			if(result[i]>=n1.length)
+		for (int i = 0; i < k; i++) {
+			if (result[i] >= n1.length)
 				l2.add(result[i]);
-			else 
-				l1.add(result[i]);			
+			else
+				l1.add(result[i]);
 		}
-		
-		for(int i=0;i<l1.size()-1;i++){
-			if(l1.get(i)>l1.get(i+1))return false;
+
+		for (int i = 0; i < l1.size() - 1; i++) {
+			if (l1.get(i) > l1.get(i + 1))
+				return false;
 		}
-		for(int i=0;i<l2.size()-1;i++){
-			if(l2.get(i)>l2.get(i+1))return false;
+		for (int i = 0; i < l2.size() - 1; i++) {
+			if (l2.get(i) > l2.get(i + 1))
+				return false;
 		}
 		return true;
 	}
 
 	public static void main(String[] args) {
-		int[] a = { 3, 4, 6, 5 }, b = { 9, 1, 2, 5, 8, 3 };
+		int[] a = { 3, 9 }, b = { 8, 9 };
 		Leet321MaxNumber_03 m = new Leet321MaxNumber_03();
 		System.out.println(Arrays.toString(a));
 		System.out.println(Arrays.toString(b));
-		System.out.println(Arrays.toString(new Leet321MaxNumber_03().maxNumber(a, b, 5)));
+		int[] re = new Leet321MaxNumber_03().maxNumber(a, b, 3);
+
+		System.out.println("result:" + Arrays.toString(re));
 	}
 }
