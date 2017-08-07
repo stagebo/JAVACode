@@ -86,7 +86,7 @@ public class Leet321MaxNumber {
 	public boolean greatOrEquals(int[] a,int[] b,int i,int j){
 		for(;i<a.length&&j<b.length;i++,j++){
 			if(a[i]>b[j])return true;
-			else if(a[i]<b[j])return false;
+			else if(a[i]<b[j])return false;  
 		}
 
 		if(i==a.length)return false;
