@@ -83,7 +83,7 @@ public class Leet321MaxNumber_03 {
 	 * @param n
 	 */
 	public void solution(int n) {
-		//System.out.println(n + ":" + Arrays.toString(result));//记录回溯过程
+		System.out.println(n + ":" + Arrays.toString(result));//记录回溯过程
 		if (n == k) {
 			if (isLegal()) {
 				int[] tre = new int[result.length];
@@ -103,6 +103,7 @@ public class Leet321MaxNumber_03 {
 				nsum[1][max] = 1;
 				solution(n + 1);
 				nsum[1][max] = 0;
+				result[n]=0;
 			}
 		}
 
