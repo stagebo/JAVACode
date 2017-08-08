@@ -18,7 +18,7 @@ import java.util.Arrays;
  * Example 3: nums1 = [3, 9] nums2 = [8, 9] k = 3 return [9, 8, 9]
  * 
  * @author WANYONGBO
- *
+ * @version 1.0 2017年8月8日08:18:52
  */
 public class Leet321MaxNumber_03 {
 	private int[] n1;
@@ -61,6 +61,7 @@ public class Leet321MaxNumber_03 {
 
 	/**
 	 * 将两个数组连接到一个长数组里面
+	 * 
 	 */
 	private void copyArrays() {
 		// TODO Auto-generated method stub
