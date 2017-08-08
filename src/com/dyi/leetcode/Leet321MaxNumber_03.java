@@ -17,6 +17,7 @@ import java.util.Arrays;
  * 
  * Example 3: nums1 = [3, 9] nums2 = [8, 9] k = 3 return [9, 8, 9]
  * 
+ * @since 2017年8月8日08:13:09
  * @author WANYONGBO
  *
  */
@@ -28,6 +29,7 @@ public class Leet321MaxNumber_03 {
 	private int[] result;
 	private int sumLen;
 	private int maxResult;
+
 	/**
 	 * 2017年8月7日10:54:38--利用回溯法求出合法全解，取最大值
 	 * 
@@ -44,7 +46,7 @@ public class Leet321MaxNumber_03 {
 		this.k = k;
 		this.sumLen = n1.length + n2.length;
 		copyArrays();
-		maxResult=0;
+		maxResult = 0;
 		/* 求全解 */
 		solution(0);
 		/* 取最值 */
@@ -83,7 +85,7 @@ public class Leet321MaxNumber_03 {
 	 * @param n
 	 */
 	public void solution(int n) {
-		System.out.println(n + ":" + Arrays.toString(result));//记录回溯过程
+		System.out.println(n + ":" + Arrays.toString(result));// 记录回溯过程
 		if (n == k) {
 			if (isLegal()) {
 				int[] tre = new int[result.length];
@@ -91,8 +93,8 @@ public class Leet321MaxNumber_03 {
 					tre[i] = nsum[0][result[i]];
 				}
 				String str = Arrays.toString(tre).replace(",", "").replace(" ", "").replace("[", "").replace("]", "");
-				int strInt=Integer.parseInt(str);
-				maxResult=maxResult>strInt?maxResult:strInt;				
+				int strInt = Integer.parseInt(str);
+				maxResult = maxResult > strInt ? maxResult : strInt;
 				return;
 			}
 		}
@@ -103,7 +105,7 @@ public class Leet321MaxNumber_03 {
 				nsum[1][max] = 1;
 				solution(n + 1);
 				nsum[1][max] = 0;
-				result[n]=0;
+				result[n] = 0;
 			}
 		}
 
