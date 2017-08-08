@@ -17,7 +17,6 @@ import java.util.Arrays;
  * 
  * Example 3: nums1 = [3, 9] nums2 = [8, 9] k = 3 return [9, 8, 9]
  * 
- * @since 2017Äê8ÔÂ8ÈÕ08:13:09
  * @author WANYONGBO
  *
  */
