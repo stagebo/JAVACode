@@ -8,8 +8,8 @@ package com.dyi.test;
  */
 public class StringMultip {
 	public static void main(String[] args) {
-		int a = 54324651;
-		int b = 5234234;
+		long a = 54324342344234651L;
+		int b = 52342234;
 		System.out.println(a * b);
 		System.out.println(multStrings(a + "", b));
 		System.out.println(multipLargeNumber(a + "", b + ""));
