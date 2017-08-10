@@ -1,5 +1,7 @@
 package com.dyi.leetcode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,19 +40,71 @@ import java.util.List;
  *
  */
 public class Leet355DesignTwitter {
+	public static void main(String[] args) {
+		Twitter obj = new Twitter();
+		obj.postTweet(1, 1);
+		obj.postTweet(2, 2);
+		obj.follow(1, 2);
+		List<Integer> param_2 = obj.getNewsFeed(1);
+		obj.unfollow(1, 2);
+	}
+}
 
+class User {
+	public int id;
+	public List<User> followed;
+
+	public User(int id) {
+		this.id = id;
+		this.followed = new ArrayList<User>();
+	}
+
+	public static User findUser(List<User> l, int id) {
+		for (User u : l) {
+			if (id == u.id)
+				return u;
+		}
+		return null;
+	}
+}
+
+class Tweet {
+	public int id;
+	public int uid;
+
+	public Tweet(int id, int uid) {
+		this.id = id;
+		this.uid = uid;
+	}
+
+	public static Tweet findTweet(List<Tweet> l, int ids) {
+		for (Tweet t : l) {
+			if (t.id == ids) {
+				return t;
+			}
+		}
+		return null;
+
+	}
 }
 
 class Twitter {
+	public List<Tweet> twitterList;
+	public List<User> userList;
 
 	/** Initialize your data structure here. */
 	public Twitter() {
-
+		userList = new ArrayList<User>();
+		twitterList = new ArrayList<Tweet>();
 	}
 
 	/** Compose a new tweet. */
 	public void postTweet(int userId, int tweetId) {
-
+		if (User.findUser(userList, userId) == null) {
+			userList.add(new User(userId));
+		}
+		Tweet t = new Tweet(tweetId, userId);
+		twitterList.add(t);
 	}
 
 	/**
@@ -59,7 +113,20 @@ class Twitter {
 	 * user herself. Tweets must be ordered from most recent to least recent.
 	 */
 	public List<Integer> getNewsFeed(int userId) {
-		return null;
+		List<Integer> uidList = new ArrayList<Integer>();
+		uidList.add(userId);
+		for (User u : User.findUser(userList, userId).followed) {
+			if (u != null)
+				uidList.add(u.id);
+		}
+		List<Integer> feedList = new ArrayList<Integer>();
+		for (int i = twitterList.size() - 1; i >= 0 && feedList.size() <= 10; i--) {
+			Tweet t = twitterList.get(i);
+			if (uidList.contains(t.uid)) {
+				feedList.add(t.id);
+			}
+		}
+		return feedList;
 	}
 
 	/**
@@ -67,7 +134,12 @@ class Twitter {
 	 * no-op.
 	 */
 	public void follow(int followerId, int followeeId) {
-
+		User u = User.findUser(userList, followerId);
+		if(u==null){
+			u=new User(followerId);
+			userList.add(u);
+		}
+		u.followed.add(User.findUser(userList, followeeId));
 	}
 
 	/**
@@ -75,15 +147,18 @@ class Twitter {
 	 * a no-op.
 	 */
 	public void unfollow(int followerId, int followeeId) {
-
+		User u = User.findUser(userList, followerId);
+		if(u==null){
+			u=new User(followerId);
+			userList.add(u);
+		}
+		u.followed.remove(User.findUser(userList, followeeId));
 	}
 }
 
 /**
- * Your Twitter object will be instantiated and called as such: 
- * Twitter obj = new Twitter(); 
- * obj.postTweet(userId,tweetId); 
- * List<Integer> param_2 = obj.getNewsFeed(userId); 
- * obj.follow(followerId,followeeId);
+ * Your Twitter object will be instantiated and called as such: Twitter obj =
+ * new Twitter(); obj.postTweet(userId,tweetId); List<Integer> param_2 =
+ * obj.getNewsFeed(userId); obj.follow(followerId,followeeId);
  * obj.unfollow(followerId,followeeId);
  */
