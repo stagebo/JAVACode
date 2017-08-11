@@ -1,4 +1,4 @@
-package com.dyi.model;
+package com.dyi.hibernate.model;
 
 import java.sql.Timestamp;
 import java.util.Date;

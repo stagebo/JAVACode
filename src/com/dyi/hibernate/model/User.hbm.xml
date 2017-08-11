@@ -1,8 +1,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.dyi.model">
-	<class name="com.dyi.model.User" table="t_user">
+<hibernate-mapping package="com.dyi.hibernate.model">
+	<class name="com.dyi.hibernate.model.User" table="t_user">
 		<!-- 主键 -->
 		<id name="f_id" column="f_id" type="string"
 			unsaved-value="00000000-0000-0000-0000-000000000000">

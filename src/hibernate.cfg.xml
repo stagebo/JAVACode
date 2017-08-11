@@ -16,6 +16,6 @@
 		<property name="hbm2ddl.auto">update</property>
 		<property name="myeclipse.connection.profile">sqlserver</property>
 		<!--注册所有ORM映射文件 -->
-		<mapping resource="com/dyi/model/User.hbm.xml" />
+		<mapping resource="com/dyi/hibernate/model/User.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>  
