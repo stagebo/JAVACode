@@ -27,7 +27,7 @@ public class HibernateTest {
 		u.setF_id(UUID.randomUUID().toString());
 		u.setF_uid("sts");
 		u.setF_pwd("sts");
-		u.setF_reg_date(new Date("2017-8-11"));
+		u.setF_reg_date(new Date());
 		u.setF_exist(1);
 
 		session.save(u);
