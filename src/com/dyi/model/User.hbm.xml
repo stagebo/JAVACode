@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.dyi.model">
+	<class name="com.dyi.model.User" table="t_user">
+		<!-- 主键 -->
+		<id name="f_id" column="f_id" type="string"
+			unsaved-value="00000000-0000-0000-0000-000000000000">
+			<generator class="assigned" />
+		</id>
+		<property name="f_uid" column="f_uid" type="string" />
+		<property name="f_pwd" column="f_pwd" type="string" />
+		<property name="f_reg_date" column="f_reg_date" type="time" />
+		<property name="f_email" column="f_email" type="string" />
+		<property name="f_phone" column="f_phone" type="string" />
+		<property name="f_age" column="f_age" type="int" />
+		<property name="f_gender" column="f_gender" type="int" />
+		<property name="f_address" column="f_address" type="string" />
+		<property name="f_exist" column="f_exist" type="int" />
+	</class>
+</hibernate-mapping>
