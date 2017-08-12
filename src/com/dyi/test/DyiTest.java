@@ -2,14 +2,19 @@ package com.dyi.test;
 
 public class DyiTest {
 	public static void main(String[] args) {
-		for (int i = 0; i < 9; i++) {
-			
-			for (int j = 0; j < 9; j++) {
-				if (j ==3)
-					break;
-				System.out.print(j + "-");
-			}
-			System.out.println();
+		System.out.println(maxRotateFunction(new int[]{4,3,2,6}));
+	}
+
+	public static int maxRotateFunction(int[] A) {
+		int sum = 0;
+		for (int i = 0; i < A.length; i++) {
+			int s = 0;
+			for (int j = 0; j < A.length; j++)
+				s = s + A[(j+i)%A.length] * j;
+			System.out.println(s);
+			sum = sum > s ? sum : s;
 		}
+		return sum;
+
 	}
 }
