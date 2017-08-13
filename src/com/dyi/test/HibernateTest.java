@@ -22,7 +22,21 @@ public class HibernateTest {
 		
 
 		Session session = SessionManager.openSession();
+		User u=new User();
+		u.setF_id(UUID.randomUUID().toString());
+		u.setF_uid("shijing");
+		u.setF_pwd("123");
+		u.setF_reg_date(new Date());
+		u.setF_exist(3);
+		
 		Transaction tran=session.beginTransaction();
+		session.save(u);
+		tran.commit();
+		
+		
+		
+		
+		/*Transaction tran=session.beginTransaction();
 		User u = new User();
 		u.setF_id(UUID.randomUUID().toString());
 		u.setF_uid("sts");
@@ -45,7 +59,7 @@ public class HibernateTest {
 			System.out.println(Arrays.toString(o));
 		}
 		
-		
+		*/
 		
 		session.close();
 		
