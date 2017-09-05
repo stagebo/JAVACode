@@ -44,7 +44,6 @@ public class FreeDraw extends JPanel {
 	public FreeDraw() {
 		this.addMouseMotionListener(new MouseMotionListener() {
 
-			@Override
 			public void mouseDragged(MouseEvent e) {
 				// TODO Auto-generated method stub
 
@@ -54,7 +53,6 @@ public class FreeDraw extends JPanel {
 				refresh(x, y);
 			}
 
-			@Override
 			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
 
