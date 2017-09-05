@@ -13,10 +13,8 @@ public class WSDLTest {
 interface W{
 	public String getW(String city);
 }
-@WebService
 class We implements W{
 
-	@Override
 	public String getW(String city) {
 		// TODO Auto-generated method stub
 		System.out.println(city);

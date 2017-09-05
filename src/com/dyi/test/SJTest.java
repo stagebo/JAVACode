@@ -36,13 +36,11 @@ interface IAlert {
 
 class AlertA implements IAlert {
 
-	@Override
 	public void deal() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void writeLog() {
 		// TODO Auto-generated method stub
 
@@ -52,13 +50,11 @@ class AlertA implements IAlert {
 
 class AlertB implements IAlert {
 
-	@Override
 	public void deal() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void writeLog() {
 		// TODO Auto-generated method stub
 
@@ -68,13 +64,11 @@ class AlertB implements IAlert {
 
 class AlertC implements IAlert {
 
-	@Override
 	public void deal() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void writeLog() {
 		// TODO Auto-generated method stub
 

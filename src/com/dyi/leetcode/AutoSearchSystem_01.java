@@ -1,4 +1,4 @@
-package com.dyi.leetcode;
+/*package com.dyi.leetcode;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,14 +9,14 @@ public class AutoSearchSystem_01 {
 	private List<Item> resultList = new ArrayList<Item>();
 	private StringBuilder tempString=new StringBuilder();
 	private char endChar='#';
-	/**
+	*//**
 	 * '#'表示结束. 其他字符则表示继续查询。
 	 * 
 	 * @param c
 	 * @return
-	 */
+	 *//*
 	public ArrayList<Item> input(char c) {
-		/*输入结束，处理结果并返回*/
+		输入结束，处理结果并返回
 		if(c==endChar){
 			
 			
@@ -83,12 +83,12 @@ public class AutoSearchSystem_01 {
 	}
 }
 
-/**
+*//**
  * 储存每一条记录
  * 
  * @author WANYONGBO
  *
- */
+ *//*
 class Item implements Comparable<Item>{
 	private int count;
 	private String content;
@@ -128,3 +128,4 @@ class Item implements Comparable<Item>{
 	}
 
 }
+*/
