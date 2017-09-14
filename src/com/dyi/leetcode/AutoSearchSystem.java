@@ -1,10 +1,10 @@
-package com.dyi.leetcode;
+/*package com.dyi.leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
+*//**
  * Design a search autocomplete system for a search engine. Users may input a
  * sentence (at least one word and end with a special character '#'). For each
  * character they type except '#', you need to return the top 3 historical hot
@@ -72,7 +72,7 @@ import java.util.List;
  * 
  * @author Stagebo
  *
- */
+ *//*
 public class AutoSearchSystem {
 	public static void main(String[] args) {
 		AutocompleteSystem ac = new AutocompleteSystem(
@@ -140,7 +140,7 @@ class AutocompleteSystem {
 					l[i] = l[j];
 					l[j] = ttt;
 				}
-				/*if (i1 == i2) {
+				if (i1 == i2) {
 					if (s1[0].compareTo(s2[0]) == 1) {
 						String tt = s1[0];
 						s1[0] = s2[0];
@@ -148,7 +148,7 @@ class AutocompleteSystem {
 						l[i] = String.join("&", s2);
 						l[j] = String.join("&", s1);
 					}
-				}*/
+				}
 			}
 		}
 	}
@@ -170,3 +170,4 @@ class AutocompleteSystem {
 
 	}
 }
+*/

@@ -2,7 +2,12 @@ package com.dyi.test;
 
 public class DyiTest {
 	public static void main(String[] args) {
-		System.out.println(maxRotateFunction(new int[]{4,3,2,6}));
+		System.out.println(java.net.URLDecoder.decode("st"));
+		System.out.println(new Integer(1000)==1000);
+		System.out.println(new Integer(1000)==new Integer(1000));
+		Integer i=-128;
+		Integer j=-128;
+		System.out.println(i==j);
 	}
 
 	public static int maxRotateFunction(int[] A) {
