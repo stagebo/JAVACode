@@ -1,15 +1,15 @@
-package com.dyi.leetcode;
+/*package com.dyi.leetcode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
+*//**
  * A binary watch has 4 LEDs on the top which represent the hours (0-11), and
  * the 6 LEDs on the bottom represent the minutes (0-59).
  * 
- * ¡¤ ¡¤ ¡¤ ¡¤£¨hour£© ¡¤ ¡¤ ¡¤ ¡¤ ¡¤£¨mins£©.
+ * ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½hourï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½minsï¿½ï¿½.
  * 
  * Each LED represents a zero or one, with the least significant bit on the
  * right.
@@ -30,15 +30,15 @@ import java.util.Set;
  * 
  * @author WANYONGBO
  *
- */
+ *//*
 public class BinaryWatch {
-	/**
-	 * Ò»¹²4+6=10¸öµÆ£¬ÓÃ1´ú±íÁÁ£¬0´ú±íÃð¡£Ê®¸öµÆ·Ö±ð´ú±íµÄ·ÖÖÓÊýÎª£º 480,240,120,60,32,16,8,4,2,1
-	 * µÚÒ»²½£ºÇó³ön¸ö1ºÍ10-n¸ö0×éºÏµÄÅÅÁÐÊý¡£ µÚ¶þ²¿£º¼ÆËã³ö¶ÔÓ¦µÄÅÅÁÐËù´ú±íµÄÊ±¼ä£¬Í¬Ê±È¥³ý²»ºÏÀíµÄÊ±¼ä¡£ µÚÈý²½£º
+	*//**
+	 * Ò»ï¿½ï¿½4+6=10ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½Ê®ï¿½ï¿½ï¿½Æ·Ö±ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ 480,240,120,60,32,16,8,4,2,1
+	 * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ï¿½1ï¿½ï¿½10-nï¿½ï¿½0ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬Í¬Ê±È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£ ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param num
 	 * @return
-	 */
+	 *//*
 	public static List<String> readBinaryWatch(int num) {
 		List<String> times = new ArrayList<String>();
 		for (int h = 0; h < 12; h++)
@@ -70,11 +70,11 @@ public class BinaryWatch {
 		return l2;
 	}
 
-	/**
-	 * È«ÅÅÁÐÎÊÌâ¿ÉÓÃÇî¾Ù·¨ÊµÏÖ£¬ÊÂ¼þ¸ºÔð¶ÈºÍ»ØËÝ·¨Ò»ÖÂ£¬ÎÞÓÅµã~
+	*//**
+	 * È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·ï¿½Êµï¿½Ö£ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ÈºÍ»ï¿½ï¿½Ý·ï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ï¿½Åµï¿½~
 	 * 
 	 * @param str
-	 */
+	 *//*
 	public static void run(String str) {
 		System.out.println("Start!");
 		strs = str.split(",");
@@ -87,7 +87,7 @@ public class BinaryWatch {
 
 	public static void solution(int n) {
 		if (n == strs.length) {
-			/* È¥ÖØ */
+			 È¥ï¿½ï¿½ 
 			l.add(String.join("", arr).replaceAll("\\d+", ""));
 			return;
 		}
@@ -138,3 +138,4 @@ public class BinaryWatch {
 	private static char off = 'F';
 	private static int[] timeTable = { 480, 240, 120, 60, 32, 16, 8, 4, 2, 1 };
 }
+*/

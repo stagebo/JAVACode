@@ -15,7 +15,7 @@ public class ArrayUtils {
 		int w = arr[0].length - 2;
 		int h = arr.length - 2;
 		if (w < 1 || h < 1) {
-			return null;
+			return null;  
 		}
 		double[][] result = new double[h][w];
 		for (int i = 1; i <= h; i++) {
