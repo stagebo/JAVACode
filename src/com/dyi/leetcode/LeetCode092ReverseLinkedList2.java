@@ -20,7 +20,7 @@ public class LeetCode092ReverseLinkedList2 {
 		OneWayNode t = head;
 		for(int i=2;i<6;i++){
 			t.next=new OneWayNode(i);
-			t=t.next;
+			t=t.next;  
 		}
 		
 	}
