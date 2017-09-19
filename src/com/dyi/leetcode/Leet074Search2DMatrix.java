@@ -22,8 +22,19 @@ public class Leet074Search2DMatrix {
 		System.out.println(searchMatrix(matrix, 6));
 	}
 
+	/**
+	 * 不太明白这个题的考点，如果说把这个二微矩阵当做一个一维有序数组来查找，那么查找时间复杂度是log(m+n)=logm+logn.
+	 * 如果先按照行来找然后用二分查找来查找那一行，那么时间复杂度是m+logn.
+	 * 显然前者时间复杂度比较小。。。
+	 * @param ma
+	 * @param t
+	 * @return
+	 */
 	public static boolean searchMatrix(int[][] ma, int t) {
 		int m =ma.length;
+		if(m<1){
+			return false;
+		}
 		int n= ma[0].length;
 		if(m<1||n<1){
 			return false;
