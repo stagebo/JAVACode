@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ArrayUtils {
 
 	/**
-	 * ¾í»ıÔËËã
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param f
 	 * @param arr
@@ -14,8 +14,8 @@ public class ArrayUtils {
 	public double[][] convolution(double[][] f, double[][] arr) {
 		int w = arr[0].length - 2;
 		int h = arr.length - 2;
-		if (w < 1 || h < 1) {
-			return null;
+		if (w < 1 || h < 1) {    
+			return null;  
 		}
 		double[][] result = new double[h][w];
 		for (int i = 1; i <= h; i++) {
