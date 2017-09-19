@@ -20,6 +20,7 @@ public class Leet074Search2DMatrix {
 		int[][] matrix = new int[][] { new int[] { 1, 3, 5, 7 },
 				new int[] { 10, 11, 16, 20 }, new int[] { 23, 30, 34, 50 } };
 		System.out.println(searchMatrix(matrix, 6));
+		System.out.println(Double.parseDouble("-3E-3"));
 	}
 
 	/**
@@ -44,12 +45,12 @@ public class Leet074Search2DMatrix {
 		}
 			
 		int mi=0;
-		for(mi=0;mi<m;mi++){
+		for(mi=0;mi<m;mi++){//T=m
 			if(ma[mi][n-1]>=t){
 				break;
 			}
 		}
-		for(int i=0;i<n;i++){//用二分查找优化
+		for(int i=0;i<n;i++){//用二分查找优化 
 			if(ma[mi][i]==t){
 				return true;
 			}
