@@ -17,10 +17,10 @@ import com.dyi.utils.HttpHelper;
 public class DoctorExamination {
 	public static void main(String[] args) throws ParseException, IOException {
 		String url;
-		String username = "52010319701008522X";
+		String username = "";
 		String pwd = "391122";
 
-		username = "522225197607010066";
+		username = "";
 		pwd = "391122";// 391122
 		HttpHelper h = new HttpHelper();
 		url = "http://api.yiboshi.com/api/study/student/login";
