@@ -25,6 +25,15 @@
 	<classpathentry kind="lib" path="Lib/Net/httpcore-4.4.6.jar"/>
 	<classpathentry kind="lib" path="Lib/Net/commons-math3-3.2.jar"/>
 	<classpathentry kind="lib" path="Lib/Net/org.apache.commons.logging-1.0.4.v200706111724.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/com.sun.java.jdk7.win32.x86_64_1.7.0.u45"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.hibernate_4.1">
+		<attributes>
+			<attribute name="owner.project.facets" value="me.hibernate"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
