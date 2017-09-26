@@ -18,35 +18,36 @@ public class RegisterWish {
 
 	public static void main(String[] args) throws ClientProtocolException,
 			IOException {
-		for(int i=0;i<100;i++)
-		new Thread(new Runnable() {
-			public void run() {
-				while (true) {
+		for (int i = 0; i < 100; i++)
+			new Thread(new Runnable() {
+				public void run() {
+					while (true) {
 
-					String fName = StringHelper.getRandomName(6);
-					String lName = StringHelper.getRandomName(6);
-					String email = StringHelper.getRandomNum(9) + "@qq.com";
-					String pwd = "123456";
-					String regInfo = String.format("{%s},{%s},{%s},{%s}",
-							fName, lName, email, pwd);
-					try {
-						if (register(fName, lName, email, pwd)) {
-							System.out.println(regInfo);
-							regList.add(regInfo);
-							System.out.println(regList.size());
-						} else {
-							System.out.println("注册失败" + regInfo);
+						String fName = StringHelper.getRandomName(6);
+						String lName = StringHelper.getRandomName(6);
+						String email = StringHelper.getRandomNum(11)
+								+ "@qq.com";
+						String pwd = "123456";
+						String regInfo = String.format("{%s},{%s},{%s},{%s}",
+								fName, lName, email, pwd);
+						try {
+							if (register(fName, lName, email, pwd)) {
+								//System.out.println(regInfo);
+								regList.add(regInfo);
+								System.out.println(regList.size());
+							} else {
+								System.out.println("注册失败" + regInfo);
+							}
+						} catch (ClientProtocolException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
 				}
-			}
-		}).start();
+			}).start();
 
 	}
 
@@ -69,13 +70,15 @@ public class RegisterWish {
 		headMap.put("X-XSRFToken", xsrf);
 
 		result = http.post(url, map, headMap);
-		/*
-		 * Map reInfo = JSONObject.fromObject(result);
-		 * if(reInfo.containsKey("msg")&&reInfo.get("msg") == ""){ return true;
-		 * }
-		 */
+
+		
+		if (result.contains("new") ) {
+			System.out.println("注册成功**************************************************************");
+			return true;
+		}
 		System.out.println(result);
-		return true;
+		
+		return false;
 
 	}
 }

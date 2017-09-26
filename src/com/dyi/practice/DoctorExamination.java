@@ -16,27 +16,33 @@ import com.dyi.utils.HttpHelper;
 
 public class DoctorExamination {
 	public static void main(String[] args) throws ParseException, IOException {
+		try{
 		String url;
 		String username = "";
 		String pwd = "391122";
 
 		username = "";
 		pwd = "391122";// 391122
+		
+		username = "522121199002200068";
+		pwd = "584520";
 		HttpHelper h = new HttpHelper();
 		url = "http://api.yiboshi.com/api/study/student/login";
 		List<BasicNameValuePair> pairList = new ArrayList<BasicNameValuePair>();
 		pairList.add(new BasicNameValuePair("username", username));
 		pairList.add(new BasicNameValuePair("password", EncriptHelper
 				.GetMD5Code(pwd)));
-		Map studentInfo = JSONObject.fromObject(JSONObject.fromObject(
+		/*Map studentInfo = JSONObject.fromObject(JSONObject.fromObject(
 				JSONObject.fromObject(h.sendPost(url, pairList)).get("data"))
 				.get("studentInfo"));
 		for (Object key : studentInfo.keySet()) {
 			System.out.println(key + " : " + studentInfo.get(key.toString()));
 		}
-		String userid = studentInfo.get("id").toString();
-
-		url = "http://api.yiboshi.com/api/study/student/listStudentProjCourseInfoAndStatus?userId=51424&trainingId=363&courseState=&compulsory=&keyword=";
+		 */
+		String userid = "185313";//studentInfo.get("id").toString();
+		System.out.println(h.sendPost(url, pairList));
+		url = "http://api.yiboshi.com/api/study/student/listStudentProjCourseInfoAndStatus?"
+				+ "userId=185313&trainingId=363&courseState=&compulsory=&keyword=";
 		String courseList = h.sendGet(url);
 		JSONObject json = JSONObject.fromObject(courseList);
 		Map map = json;
@@ -85,6 +91,9 @@ public class DoctorExamination {
 			for (String failID : errList) {
 				System.out.println(failID);
 			}
+		}}
+		catch(Exception ex){
+			ex.printStackTrace();
 		}
 	}
 }
