@@ -1,6 +1,7 @@
 package com.dyi.image;
 
 import java.io.File;
+import java.util.List;
 
 public class ImageTest {
 
@@ -10,14 +11,18 @@ public class ImageTest {
 		 fileName = "C:\\Users\\wyb\\Desktop\\1.jpg";
 		//File file = ImageDeal.openFile();
 		int[][] r = ImageDeal.getGrayImage(fileName);
-		for(int i=0;i<r[0].length;i++)
-		{
-			for(int j=0;j<r.length;j++)
-				System.out.print(r[i][j]+"  ");
-			System.out.println();
+		System.out.println(r[320][105]);
+		System.out.println(r[533][159]);
+		List<int[]> re = ImageDeal.pickPoint(r);
+		if(re.size()<1){
+			System.out.println("选点失败！");
+			return;
 		}
-		
-		ImageDeal.showImage(r, "我勒个去");
+		for(int[] xy:re){
+			int x = xy[0],y = xy[1];
+			System.out.println(x+"--"+y+":"+r[x][y]);
+		}
+		//ImageDeal.showImage(r, "我勒个去");
 		
 		
 	}
