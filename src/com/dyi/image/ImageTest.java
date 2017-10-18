@@ -7,7 +7,9 @@ public class ImageTest {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		String fileName = "C:\\Users\\wyb\\Desktop\\2.png";
+		new MainFrame();
+		
+	/*	String fileName = "C:\\Users\\wyb\\Desktop\\2.png";
 		 fileName = "C:\\Users\\wyb\\Desktop\\1.jpg";
 		//File file = ImageDeal.openFile();
 		int[][] r = ImageDeal.getGrayImage(fileName);
@@ -21,7 +23,7 @@ public class ImageTest {
 		for(int[] xy:re){
 			int x = xy[0],y = xy[1];
 			System.out.println(x+"--"+y+":"+r[x][y]);
-		}
+		}*/
 		//ImageDeal.showImage(r, "我勒个去");
 		
 		
