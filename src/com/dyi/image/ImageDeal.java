@@ -627,7 +627,7 @@ public class ImageDeal {
 		}
 		
 		// 第一步：计算每一个点对于grayImg的权重，得到权重矩阵W
-		// 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
+		// 计算公式 Wij = exp(-b(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点,b 是权值
 		Map<String,double[][]> weightMax = new HashMap<String,double[][]>();
 		for(Point point:pointList){
 			int x = point.x,y = point.y;
@@ -665,7 +665,7 @@ public class ImageDeal {
 	public static double getWeight(int wi,int wj){
 		double re = wi-wj;
 		re = Math.pow(re, 2);
-		re = -2*re;
+		re = -90*re;//权值，可调整
 		re = Math.exp(re);
 		return re;
 	}
