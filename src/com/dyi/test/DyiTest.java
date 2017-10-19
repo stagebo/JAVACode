@@ -2,24 +2,39 @@ package com.dyi.test;
 
 public class DyiTest {
 	public static void main(String[] args) {
-		System.out.println(java.net.URLDecoder.decode("st"));
-		System.out.println(new Integer(1000)==1000);
-		System.out.println(new Integer(1000)==new Integer(1000));
-		Integer i=-128;
-		Integer j=-128;
-		System.out.println(i==j);
+		double[] b = new double[] { 1.0 / 3.0,1.0 / 3.0,1.0 / 3.0};
+		double[][] a = new double[][] { { 0, 0.5, 0.5 }, { 1, 0, 0 }, { 0, 1, 0 } };
+		a=new double[][]
+				{
+				{0,0.5,0,0},
+				{1.0/3.0,0,0,0.5},
+				{1.0/3.0,0,1,0.5},
+				{1.0/3.0,0.5,0,0}
+				
+				};
+		b=new double[]{0.25,0.25,0.25,0.25};
+		double alf=0.85;
+		double nx=0.15;
+		for (int i = 0; i < 1000; i++) {
+			double[] t = new double[b.length];
+			for (int r = 0; r < a.length; r++) {
+				for (int c = 0; c < a[0].length; c++) {
+					t[r] += a[r][c] * b[c];
+					
+				}
+				t[r]=t[r]*alf+nx/4;
+			}
+
+			printA(b);
+			b=t;
+		}
+
 	}
 
-	public static int maxRotateFunction(int[] A) {
-		int sum = 0;
-		for (int i = 0; i < A.length; i++) {
-			int s = 0;
-			for (int j = 0; j < A.length; j++)
-				s = s + A[(j+i)%A.length] * j;
-			System.out.println(s);
-			sum = sum > s ? sum : s;
+	public static void printA(double[] d) {
+		for (int i = 0; i < d.length; i++) {
+			System.out.print(d[i] + ",");
 		}
-		return sum;
-
+		System.out.println();
 	}
 }
