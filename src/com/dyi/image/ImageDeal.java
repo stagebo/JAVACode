@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -619,14 +620,34 @@ public class ImageDeal {
 		System.out.println("Start");
 		System.out.print("图片宽高：" + grayImg[0].length + "," + grayImg.length);
 		System.out.println();
-		int i = 1;
-		for (Point p : pointList)
-
-			System.out.println("坐标选点" + (i++) + ":" + p.x + "," + p.y);
-
+		int ii = 1;
+		for (Point p : pointList){			
+			System.out.print("坐标选点" + (ii++) + ":" + p.x + "," + p.y);
+			System.out.println(","+grayImg[p.y][p.x]);
+		}
+		
 		// 第一步：计算每一个点对于grayImg的权重，得到权重矩阵W
 		// 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
-
+		Map<String,double[][]> weightMax = new HashMap<String,double[][]>();
+		for(Point point:pointList){
+			int x = point.x,y = point.y;
+			int wi = grayImg[y][x];
+			double[][] tempFirst = new double[grayImg.length][grayImg[0].length];
+			for(int i=0;i<grayImg.length;i++){
+				for(int j=0;j<grayImg[0].length;j++){
+					int wj = grayImg[i][j];
+					double weight = getWeight(wi, wj);
+					tempFirst[i][j] = weight;
+					System.out.print("  "+weight);
+				}
+				System.out.println();
+			}
+			System.out.println();System.out.println();System.out.println();
+			//
+			String key = x+"|"+y;
+			weightMax.put(key, tempFirst);
+		}
+		
 		// 第二步：利用权重矩阵进行随机游走，得到较稳定的概率分布
 
 		// 第三步：利用各组点对应的概率分布对比计算每一个点所属的位置。
@@ -635,5 +656,17 @@ public class ImageDeal {
 
 		return null;
 	}
-
+	/**
+	 * 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
+	 * @param wi 目标点
+	 * @param wj 散点
+	 * @return
+	 */
+	public static double getWeight(int wi,int wj){
+		double re = wi-wj;
+		re = Math.pow(re, 2);
+		re = -2*re;
+		re = Math.exp(re);
+		return re;
+	}
 }
