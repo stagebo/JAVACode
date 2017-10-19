@@ -583,10 +583,12 @@ public class ImageDeal {
 			List<Point> pointList) {
 		// TODO Auto-generated method stub
 		System.out.println("Start");
-		System.out.println(grayImg.length);
-		System.out.println(grayImg[0].length);
+		System.out.print("图片宽高："+grayImg[0].length+","+grayImg.length);
+		System.out.println();
+		int i =1 ;
 		for(Point p:pointList)
-		System.out.println(p.x+","+p.y);
+		
+		System.out.println("坐标选点"+(i++)+":"+p.x+","+p.y);
 		
 		// 第一步：计算每一个点对于grayImg的权重，得到权重矩阵W
 		// 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点

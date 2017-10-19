@@ -23,14 +23,14 @@ public class MainFrame extends JFrame {
 	private String imgSourceFileName = null;
 	private List<Point> pointList = new ArrayList<Point>();
 	private boolean choisePointStart = false;
-	//储存计算结果。
-	private Map<Point,int[][]> devideResult = null;
+	// 储存计算结果。
+	private Map<Point, int[][]> devideResult = null;
 
 	public MainFrame() {
 		this.setSize(800, 500);
 		this.setLocation(200, 100);
 		this.setLayout(null);
-		
+
 		JButton openFile = new JButton("打开文件");
 		openFile.setBounds(10, 20, 120, 30);
 		this.add(openFile);
@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
 		showFileName.setBounds(140, 20, 470, 30);
 		this.add(showFileName);
 		showFileName.setEditable(false);
-		
+
 		final JLabel showImg = new JLabel();
 		showImg.setBounds(10, 60, 600, 400);
 		showImg.setBorder(BorderFactory.createBevelBorder(1));
@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 		JButton resetData = new JButton("重置数据");
 		resetData.setBounds(620, 140, 120, 30);
 		this.add(resetData);
-		
+
 		JButton beginDevide = new JButton("开始处理");
 		beginDevide.setBounds(620, 180, 120, 30);
 		this.add(beginDevide);
@@ -222,7 +222,7 @@ public class MainFrame extends JFrame {
 				if (imgSourceFileName != null) {
 					setBgImg(new File(imgSourceFileName), showImg);
 					repaint();
-				}else if(imgSource != null){
+				} else if (imgSource != null) {
 					imgSourceFileName = imgSource.getAbsolutePath();
 					setBgImg(new File(imgSourceFileName), showImg);
 					repaint();
@@ -231,43 +231,55 @@ public class MainFrame extends JFrame {
 		});
 
 		beginDevide.addMouseListener(new MouseListener() {
-			
+
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				try {
 					int[][] grayImg = ImageDeal.getGrayImage(imgSourceFileName);
-					//得到返回结果
-					Map<Point,int[][]> result = ImageDeal.beginDevideImage(grayImg,pointList);
-					
-					//进行结果渲染
-					
+					double realW = grayImg[0].length;
+					double realH = grayImg.length;
+					double fakeW = showImg.getWidth();
+					double fakeH = showImg.getHeight();
+					List<Point> pa = new ArrayList<Point>();
+					for(Point p :pointList){
+						int x = p.x,y=p.y;
+						x=(int)(realW*x/fakeW);
+						y=(int)(realH*y/fakeH);
+						pa.add(new Point(x,y));
+					}
+					// 得到返回结果
+					Map<Point, int[][]> result = ImageDeal.beginDevideImage(
+							grayImg, pa);
+
+					// 进行结果渲染
+
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		
+
 		showImg.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -287,24 +299,28 @@ public class MainFrame extends JFrame {
 
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
-			}
 
-			
+			}
 
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (choisePointStart) {
 					int x = e.getX();
 					int y = e.getY();
-					pointList.add(new Point(x,y));
+					Image img = null;
+					try {
+						img = ImageIO.read(imgSource);
+					} catch (Exception ex) {
+					}
+					
+					pointList.add(new Point(x, y));
 					repaint();
 				}
 			}
 		});
-		
+
 	}
-	
+
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g_2d = (Graphics2D) g;
