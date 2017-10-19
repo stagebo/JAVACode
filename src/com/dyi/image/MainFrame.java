@@ -18,20 +18,34 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+/**
+ * 基于随机游走算法的图像分割处理主页
+ * 
+ * @author WANYONGBO
+ * 
+ */
 public class MainFrame extends JFrame {
+	// 图片资源
 	private File imgSource = null;
+	// 图片资源全名
 	private String imgSourceFileName = null;
+	// 半自动选点结果
 	private List<Point> pointList = new ArrayList<Point>();
+	// 是否开始选点
 	private boolean choisePointStart = false;
 	// 储存计算结果。
 	private Map<Point, int[][]> devideResult = null;
 
+	/**
+	 * 构造函数，初始化界面，注册各事件
+	 */
 	public MainFrame() {
 		this.setSize(800, 500);
 		this.setLocation(200, 100);
 		this.setLayout(null);
+		this.setTitle("基于随机游走算法的半自动图像分割技术");
 
-		JButton openFile = new JButton("打开文件");
+		JButton openFile = new JButton("打开图片");
 		openFile.setBounds(10, 20, 120, 30);
 		this.add(openFile);
 
@@ -68,6 +82,7 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		//打开图片按钮点击事件
 		openFile.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -99,6 +114,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 
+		//图片灰度化按钮点击事件
 		toGray.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -261,11 +277,11 @@ public class MainFrame extends JFrame {
 					double fakeW = showImg.getWidth();
 					double fakeH = showImg.getHeight();
 					List<Point> pa = new ArrayList<Point>();
-					for(Point p :pointList){
-						int x = p.x,y=p.y;
-						x=(int)(realW*x/fakeW);
-						y=(int)(realH*y/fakeH);
-						pa.add(new Point(x,y));
+					for (Point p : pointList) {
+						int x = p.x, y = p.y;
+						x = (int) (realW * x / fakeW);
+						y = (int) (realH * y / fakeH);
+						pa.add(new Point(x, y));
 					}
 					// 得到返回结果
 					Map<Point, int[][]> result = ImageDeal.beginDevideImage(
@@ -312,7 +328,7 @@ public class MainFrame extends JFrame {
 						img = ImageIO.read(imgSource);
 					} catch (Exception ex) {
 					}
-					
+
 					pointList.add(new Point(x, y));
 					repaint();
 				}
@@ -321,6 +337,9 @@ public class MainFrame extends JFrame {
 
 	}
 
+	/**
+	 * 重写绘图函数，选点的时候标记图片
+	 */
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g_2d = (Graphics2D) g;
@@ -335,6 +354,12 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * 设置label背景，将制定图片作为背景设置到制定JLabel上
+	 * 
+	 * @param f
+	 * @param jl
+	 */
 	public void setBgImg(File f, JLabel jl) {
 		Image img = null;
 		try {
@@ -349,6 +374,12 @@ public class MainFrame extends JFrame {
 		jl.setIcon(icon);
 	}
 
+	/**
+	 * 设置label背景，将制定图片作为背景设置到制定JLabel上
+	 * 
+	 * @param img
+	 * @param jl
+	 */
 	public void setBgImg(Image img, JLabel jl) {
 		BufferedImage bimg = ImageDeal.toBufferedImage(img);
 		BufferedImage bcImg = ImageDeal.changeImageSize(bimg, jl.getWidth(),

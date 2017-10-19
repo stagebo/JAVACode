@@ -219,13 +219,43 @@ public class ImageDeal {
 	 */
 	public static File openFile() {
 		JFileChooser fd = new JFileChooser();
-		fd.setFileFilter(new ImageFilter());
-		// fd.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		//添加图片文件过滤器。只显示图片文件类型
+		fd.setFileFilter(new FileFilter() {
+			
+			public boolean accept(File f) {
+				if (f.isDirectory()) {
+					return true;
+				}
+				String fileName = f.getName();
+				String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+				if (extension != null) {
+					if (extension.equals("gif") || extension.equals("jpeg")
+							|| extension.equals("jpg")
+							|| extension.equals("png")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				return false;
+			}
+
+			public String getDescription() {
+				return "图片文件(*.jpg, *.jpeg, *.gif, *.png)";
+			}
+		});
+		
 		fd.showOpenDialog(null);
 		File f = fd.getSelectedFile();
 		return f;
 	}
 
+	/**
+	 * 选择图片上的点
+	 * 线程中不可用----待修复bug
+	 * @param img
+	 * @return
+	 */
 	public static List<int[]> pickPoint(int[][] img) {
 		int h = img.length;
 		int w = img[0].length;
@@ -352,6 +382,11 @@ public class ImageDeal {
 		}
 	}
 
+	/**
+	 * 选择图片上的点
+	 * @param img
+	 * @return
+	 */
 	public static List<int[]> pickPoint(Image img) {
 		int w = img.getWidth(null);
 		int h = img.getHeight(null);
@@ -472,7 +507,7 @@ public class ImageDeal {
 	}
 
 	/**
-	 * 
+	 * 改变图片尺寸到指定大小
 	 * @param img
 	 * @param width
 	 * @param height
@@ -581,57 +616,24 @@ public class ImageDeal {
 	 */
 	public static Map<Point, int[][]> beginDevideImage(int[][] grayImg,
 			List<Point> pointList) {
-		// TODO Auto-generated method stub
 		System.out.println("Start");
-		System.out.print("图片宽高："+grayImg[0].length+","+grayImg.length);
+		System.out.print("图片宽高：" + grayImg[0].length + "," + grayImg.length);
 		System.out.println();
-		int i =1 ;
-		for(Point p:pointList)
-		
-		System.out.println("坐标选点"+(i++)+":"+p.x+","+p.y);
-		
+		int i = 1;
+		for (Point p : pointList)
+
+			System.out.println("坐标选点" + (i++) + ":" + p.x + "," + p.y);
+
 		// 第一步：计算每一个点对于grayImg的权重，得到权重矩阵W
 		// 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
-		
-		
-		// 第二步：利用权重矩阵进行随机游走，得到较稳定的概率分布 
-		
-		
+
+		// 第二步：利用权重矩阵进行随机游走，得到较稳定的概率分布
+
 		// 第三步：利用各组点对应的概率分布对比计算每一个点所属的位置。
-		
+
 		// 第四步：封装返回值，进行数据输出
-		
+
 		return null;
 	}
 
-}
-
-/**
- * 图片选择过滤器
- * 
- * @author wyb
- * 
- */
-class ImageFilter extends FileFilter {
-
-	public boolean accept(File f) {
-		if (f.isDirectory()) {
-			return true;
-		}
-		String fileName = f.getName();
-		String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-		if (extension != null) {
-			if (extension.equals("gif") || extension.equals("jpeg")
-					|| extension.equals("jpg") || extension.equals("png")) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return false;
-	}
-
-	public String getDescription() {
-		return "图片文件(*.jpg, *.jpeg, *.gif, *.png)";
-	}
 }
