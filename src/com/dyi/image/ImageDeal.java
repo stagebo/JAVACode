@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
+
+import Jama.Matrix;
 
 public class ImageDeal {
 	/**
@@ -50,6 +53,47 @@ public class ImageDeal {
 		ImageIcon icon = new ImageIcon();
 		icon = new ImageIcon(bi);
 
+		JFrame jf = new JFrame(title);
+		JLabel jl = new JLabel();
+		jf.setSize(w, h);
+		jl.setSize(w, h);
+		jl.setIcon(icon);
+		jf.add(jl);
+
+		jf.setVisible(true);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	/**
+	 * 按图片灰度值矩阵展示图片
+	 * 
+	 * @param img
+	 * @param title
+	 */
+	public static void showImage(double[] imgs, String title, int w, int rgb) {
+		int h = imgs.length / w;
+		int[][] img = new int[imgs.length / w][w];
+		for(int i=0;i<h;i++){
+			for(int j=0;j<w;j++){
+				img[i][j] = (int)imgs[i*w+j];
+			}
+		}
+		printArr(img);
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
+		for (int i = 0; i < h; i++)
+			for (int j = 0; j < w; j++) {
+				int gray = img[i][j];
+				if (gray == 1) {
+					bi.setRGB(j, i, rgb);
+				} else {
+					bi.setRGB(j, i, 0xff000000);
+				}
+
+			}
+		bi =  changeImageSize(bi,300,300);
+		ImageIcon icon = new ImageIcon();
+		icon = new ImageIcon(bi);
+		w=400;h=400;
 		JFrame jf = new JFrame(title);
 		JLabel jl = new JLabel();
 		jf.setSize(w, h);
@@ -212,7 +256,27 @@ public class ImageDeal {
 		}
 		return result;
 	}
+	public static int[][] getGrayImage(BufferedImage img) throws Exception {
+		BufferedImage bi = img;
+		
+		int width = bi.getWidth();
+		int height = bi.getHeight();
+		int minx = bi.getMinX();
+		int miny = bi.getMinY();
+		int[][] result = new int[height][width];
+		for (int i = minx; i < width; i++) {
+			for (int j = miny; j < height; j++) {
+				int pixel = bi.getRGB(i, j); // 下面三行代码将一个数字转换为RGB数字
+				int r = (pixel & 0xff0000) >> 16;
+				int g = (pixel & 0xff00) >> 8;
+				int b = (pixel & 0xff);
+				int gray = (r * 77 + g * 151 + b * 28) >> 8;
+				result[j][i] = gray;// (int)( 0.30 * b + 0.59 * g + 0.11 * r)
 
+			}
+		}
+		return result;
+	}
 	/**
 	 * 打开文件选择器选择图片
 	 * 
@@ -220,9 +284,9 @@ public class ImageDeal {
 	 */
 	public static File openFile() {
 		JFileChooser fd = new JFileChooser();
-		//添加图片文件过滤器。只显示图片文件类型
+		// 添加图片文件过滤器。只显示图片文件类型
 		fd.setFileFilter(new FileFilter() {
-			
+
 			public boolean accept(File f) {
 				if (f.isDirectory()) {
 					return true;
@@ -245,15 +309,15 @@ public class ImageDeal {
 				return "图片文件(*.jpg, *.jpeg, *.gif, *.png)";
 			}
 		});
-		
+
 		fd.showOpenDialog(null);
 		File f = fd.getSelectedFile();
 		return f;
 	}
 
 	/**
-	 * 选择图片上的点
-	 * 线程中不可用----待修复bug
+	 * 选择图片上的点 线程中不可用----待修复bug
+	 * 
 	 * @param img
 	 * @return
 	 */
@@ -385,6 +449,7 @@ public class ImageDeal {
 
 	/**
 	 * 选择图片上的点
+	 * 
 	 * @param img
 	 * @return
 	 */
@@ -509,6 +574,7 @@ public class ImageDeal {
 
 	/**
 	 * 改变图片尺寸到指定大小
+	 * 
 	 * @param img
 	 * @param width
 	 * @param height
@@ -523,6 +589,15 @@ public class ImageDeal {
 		return result;
 	}
 
+	public static BufferedImage changeImageSize(int[][] imgs, int width,
+			int height) {
+		Image img = getImage(imgs);
+		BufferedImage result = new BufferedImage(width, height,
+				BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics g = result.getGraphics();
+		g.drawImage(img, 0, 0, width, height, null);
+		return result;
+	}
 	/**
 	 * Image 对象转BufferedImage对象
 	 * 
@@ -621,52 +696,222 @@ public class ImageDeal {
 		System.out.print("图片宽高：" + grayImg[0].length + "," + grayImg.length);
 		System.out.println();
 		int ii = 1;
-		for (Point p : pointList){			
+		for (Point p : pointList) {
 			System.out.print("坐标选点" + (ii++) + ":" + p.x + "," + p.y);
-			System.out.println(","+grayImg[p.y][p.x]);
+			System.out.println("," + grayImg[p.y][p.x]);
+		}
+
+		int row = grayImg.length;
+		int col = grayImg[0].length;
+		int K = pointList.size();
+		int len = row * col;
+		int lenU = len - K;
+		int lenM = K;
+		// 标记点Index
+		List<Integer> VM = new ArrayList<Integer>();
+		for (Point px : pointList) {
+			int x = px.x;
+			int y = px.y;
+			int idx = y * col + x;
+			VM.add(idx);
 		}
 		
-		// 第一步：计算每一个点对于grayImg的权重，得到权重矩阵W
-		// 计算公式 Wij = exp(-b(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点,b 是权值
-		Map<String,double[][]> weightMax = new HashMap<String,double[][]>();
-		for(Point point:pointList){
-			int x = point.x,y = point.y;
-			int wi = grayImg[y][x];
-			double[][] tempFirst = new double[grayImg.length][grayImg[0].length];
-			for(int i=0;i<grayImg.length;i++){
-				for(int j=0;j<grayImg[0].length;j++){
-					int wj = grayImg[i][j];
-					double weight = getWeight(wi, wj);
-					tempFirst[i][j] = weight;
-					System.out.print("  "+weight);
-				}
-				System.out.println();
+		// 构造像素数组
+		int[] source = new int[row * col];
+		int index = 0;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				source[index++] = grayImg[i][j];
+				// System.out.println(source[index - 1]);
 			}
-			System.out.println();System.out.println();System.out.println();
-			//
-			String key = x+"|"+y;
-			weightMax.put(key, tempFirst);
+		}
+
+		// 定义拉普拉斯原始矩阵
+		double[][] sourceLaplace = new double[row * col][row * col];
+		// 计算原始拉普拉斯矩阵数值
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < len; j++) {
+				// if i==j then di
+				// else if i adjacent j then wij
+				// else 0
+				if (i == j) {
+
+				} else if (adjancent(i, j, col)) {
+					int gi = source[i];
+					int gj = source[j];
+					double weight = getWeight(gi, gj);
+					sourceLaplace[i][j] = weight;
+				} else {
+					sourceLaplace[i][j] = 0;
+				}
+			}
+
+		}
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < len; j++) {
+				if (i != j) {
+
+					sourceLaplace[i][i] += sourceLaplace[i][j];
+				}
+			}
 		}
 		
-		// 第二步：利用权重矩阵进行随机游走，得到较稳定的概率分布
+		// 通过dirichlet积分求导取极值得到：
+		// LnX = - BTM
+		// 第一步：求Ln
+		double[][] Ln = new double[lenU][lenU];
+		for (int i = 0, ti = 0; i < len; i++) {
+			for (int j = 0, tj = 0; j < len; j++) {
+				if (!VM.contains(i) && !VM.contains(j)) {
+					Ln[ti][tj] = sourceLaplace[i][j];
+					tj++;
+				}
+			}
+			if (!VM.contains(i)) {
+				ti++;
+			}
+		}
+		
+		// 第二部：求BT
+		double[][] BT = new double[lenU][lenM];
+		for (int i = 0; i < lenU; i++) {
+			for (int j = 0; j < lenM; j++) {
+				BT[i][j] = sourceLaplace[i + lenM][j];
+			}
+		}
 
-		// 第三步：利用各组点对应的概率分布对比计算每一个点所属的位置。
+		// 第三步：求M
+		double[][] M = new double[K][K];
+		for (int i = 0; i < K; i++) {
+			M[i][i] = 1;
+		}
+		// 第四步：求解X
+		Matrix mLn = new Matrix(Ln);
+		Matrix mBT = new Matrix(BT);
+		Matrix mM = new Matrix(M);
 
-		// 第四步：封装返回值，进行数据输出
+		Matrix temp = mBT.times(mM);
+		temp = temp.times(-1);
 
+		Matrix mLnNi = mLn.inverse();
+
+		Matrix X = mLnNi.times(temp);
+		// printArr(X.getArray());
+		double[][] result = X.getArray();
+
+		for (int i = 0; i < result.length; i++) {
+			for (int j = 0; j < result[0].length; j++) {
+				result[i][j] = Math.abs(result[i][j]);
+			}
+		}
+
+		// 第五步：划分区域
+		double[][] tarIndex = new double[len][K];
+		for (int i = 0; i < result.length; i++) {
+			int ridx = maxIndex(result[i]);
+			tarIndex[i][ridx] = 1;
+		}
+		for (int i = 0; i < VM.size(); i++) {
+			for (int m = 0; m < K; m++) {
+				int tii = VM.get(VM.size()-1-i);
+				int j = tarIndex.length - 1;
+				for (; j > tii; j--) {
+					tarIndex[j][m] = tarIndex[j - 1][m];
+				}
+				for (int km = 0; km < K; km++) {
+					if (i == km) {
+						tarIndex[j][km] = 1;
+					} else {
+						tarIndex[j][km] = 0;
+					}
+
+				}
+			}
+		}
+		
+		
+		double[][] test = new Matrix(tarIndex).transpose().getArray();
+		for(int i=0;i<test.length;i++){
+			showImage(test[i], "123",col,0xffff0000);
+			
+			
+		}
+		
 		return null;
 	}
+
 	/**
-	 * 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
-	 * @param wi 目标点
-	 * @param wj 散点
+	 * 判断两点是否二维矩阵的一维化数组是否相邻
+	 * 
+	 * @param i
+	 * @param j
+	 * @param w
 	 * @return
 	 */
-	public static double getWeight(int wi,int wj){
-		double re = wi-wj;
+	public static boolean adjancent(int i, int j, int w) {
+
+		if (i + 1 == j || i - 1 == j || i + w == j || i - w == j) {
+			if (i == 6 || j == 6) {
+				System.out.println(i + "--" + j);
+			}
+			return true;
+
+		}
+
+		return false;
+	}
+
+	/**
+	 * 计算公式 Wij = exp(-2(wi-wj)^2) 其中wi 是目标点，wj 是灰度图个点
+	 * 
+	 * @param wi
+	 *            目标点
+	 * @param wj
+	 *            散点
+	 * @return
+	 */
+	public static double getWeight(int wi, int wj) {
+		double re = wi - wj;
 		re = Math.pow(re, 2);
-		re = -90*re;//权值，可调整
+		re = -90 * re;// 权值，可调整
 		re = Math.exp(re);
 		return re;
+	}
+
+	public static double max(double[] arr) {
+		double max = arr[0];
+		for (double d : arr) {
+			if (d > max) {
+				max = d;
+			}
+		}
+		return max;
+	}
+
+	public static int maxIndex(double[] arr) {
+		double max = arr[0];
+		int index = 0;
+		for (int i = 0; i < arr.length; i++) {
+			double d = arr[i];
+			if (d > max) {
+				max = d;
+				index = i;
+			}
+		}
+		return index;
+	}
+
+	public static void printArr(double[][] arr) {
+		System.out.println(arr.length + "---" + arr[0].length);
+		for (int i = 0; i < arr.length; i++)
+			System.out.println(Arrays.toString(arr[i]));
+		System.out.println("-----------------------------");
+	}
+
+	public static void printArr(int[][] arr) {
+		System.out.println(arr.length + "---" + arr[0].length);
+		for (int i = 0; i < arr.length; i++)
+			System.out.println(Arrays.toString(arr[i]));
+		System.out.println("-----------------------------");
 	}
 }

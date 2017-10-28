@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		//打开图片按钮点击事件
+		// 打开图片按钮点击事件
 		openFile.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -114,7 +114,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		//图片灰度化按钮点击事件
+		// 图片灰度化按钮点击事件
 		toGray.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -272,6 +272,11 @@ public class MainFrame extends JFrame {
 				// TODO Auto-generated method stub
 				try {
 					int[][] grayImg = ImageDeal.getGrayImage(imgSourceFileName);
+					if (grayImg.length > 60 || grayImg[0].length > 60) {
+						BufferedImage bi = ImageDeal.changeImageSize(grayImg,
+								60, 60);
+						grayImg = ImageDeal.getGrayImage(bi);
+					}
 					double realW = grayImg[0].length;
 					double realH = grayImg.length;
 					double fakeW = showImg.getWidth();
