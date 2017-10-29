@@ -829,10 +829,10 @@ public class ImageDeal {
 			}
 		}
 		
-		
+		printArr(tarIndex);
 		double[][] test = new Matrix(tarIndex).transpose().getArray();
 		for(int i=0;i<test.length;i++){
-			showImage(test[i], "123",col,0xffff0000);
+			//showImage(test[i], "123",col,0xffff0000);
 			
 			
 		}
