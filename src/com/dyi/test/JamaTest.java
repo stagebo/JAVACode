@@ -24,6 +24,7 @@ public class JamaTest {
 	      printArr(bb.inverse().getArray());
 	      System.out.println();
 	      printArr(rr.times(bb.inverse()).getArray());
+	     
 	}
 	public static void printArr(double[][] arr){
 		for(int i=0;i<arr.length;i++)

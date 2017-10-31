@@ -17,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -701,12 +700,12 @@ public class ImageDeal {
 			System.out.println("," + grayImg[p.y][p.x]);
 		}
 
-		int row = grayImg.length;
-		int col = grayImg[0].length;
+		int row = grayImg.length;//图片高度
+		int col = grayImg[0].length;//图片宽度
 		int K = pointList.size();
-		int len = row * col;
-		int lenU = len - K;
-		int lenM = K;
+		int len = row * col;//原始拉普拉斯矩阵宽度
+		int lenU = len - K;//非种子点长度
+		int lenM = K;//种子点长度
 		// 标记点Index
 		List<Integer> VM = new ArrayList<Integer>();
 		for (Point px : pointList) {
@@ -832,7 +831,7 @@ public class ImageDeal {
 		printArr(tarIndex);
 		double[][] test = new Matrix(tarIndex).transpose().getArray();
 		for(int i=0;i<test.length;i++){
-			//showImage(test[i], "123",col,0xffff0000);
+			showImage(test[i], "123",col,0xffff0000);
 			
 			
 		}
