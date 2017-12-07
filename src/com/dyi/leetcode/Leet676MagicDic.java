@@ -39,7 +39,7 @@ class MagicDictionary {
 				wa[i] = "*";
 				String temp = String.join("", wa);
 				list.add(temp);
-				wa[i] = c;
+				wa[i] = c; 
 			}
 
 		}
