@@ -3,7 +3,6 @@ package com.dyi.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Leet676MagicDic {
 	public static void main(String[] args) {
 		MagicDictionary m = new MagicDictionary();
